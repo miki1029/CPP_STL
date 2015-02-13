@@ -9,6 +9,7 @@ class Point
 public:
     Point(int _x=0, int _y=0) : x(_x), y(_y) {}
 
+    // +
     const Point operator+(const Point& arg) const
     {
         Point pt;
@@ -17,6 +18,8 @@ public:
 
         return pt;
     }
+
+    // ++
     const Point& operator++()   // prefix
     {
         ++x;
@@ -30,13 +33,8 @@ public:
         ++y;
         return pt;
     }
-    /*
-    const Point operator++(int) // postfix removing duplication
-    {
-        Point tmp = *this;
-        ++*this;
-        return tmp;
-    }*/
+
+    // --
     const Point& operator--()   // prefix
     {
         --x;
@@ -50,40 +48,29 @@ public:
         --y;
         return pt;
     }
-    /*
-    const Point operator--(int) // postfix removing duplication
+
+    // ==
+    bool operator==(const Point& arg) const
     {
-        Point tmp = *this;
-        --*this;
-        return tmp;
-    }*/
+        return x == arg.x && y == arg.y;
+    }
+    // !=
+    bool operator!=(const Point& arg) const
+    {
+        return !(*this == arg);
+    }
 
     void Print() const { cout << x << ',' << y << endl; }
 };
 
 int main()
 {
-    Point p1(2, 3), p2(2, 3);
-    Point result;
+    Point p1(2, 3), p2(5, 5), p3(2, 3);
 
-    // ++
-    result = ++p1;
-    p1.Print();
-    result.Print();
-
-    result = p2++;
-    p2.Print();
-    result.Print();
-    cout << endl;
-
-    // --
-    result = --p1;
-    p1.Print();
-    result.Print();
-
-    result = p2--;
-    p2.Print();
-    result.Print();
+    if(p1 != p2)
+        cout << "p1 != p2" << endl;
+    if(p1 == p3)
+        cout << "p1 == p3" << endl;
 
     return 0;
 }
